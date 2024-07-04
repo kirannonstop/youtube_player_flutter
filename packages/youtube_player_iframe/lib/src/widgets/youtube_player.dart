@@ -5,7 +5,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:youtube_player_iframe/src/widgets/fullscreen_youtube_player.dart';
 
@@ -134,9 +133,9 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
   }
 
   Future<void> _initPlayer() async {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      _updateBackgroundColor(widget.backgroundColor);
-    });
+    // SchedulerBinding.instance.addPostFrameCallback((_) {
+    //   _updateBackgroundColor(widget.backgroundColor);
+    // });
 
     await _controller.init();
   }
