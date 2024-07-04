@@ -76,8 +76,9 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
   void initState() {
     super.initState();
     _controller = widget.controller;
-
-    _initPlayer();
+    if (mounted) {
+      _initPlayer();
+    }
   }
 
   @override
