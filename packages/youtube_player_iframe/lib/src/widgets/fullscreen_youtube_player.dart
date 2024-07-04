@@ -61,14 +61,14 @@ class FullscreenYoutubePlayer extends StatefulWidget {
   static Future<double?> launch(
     BuildContext context, {
     required String videoId,
+    bool rootNavigator = false,
     double? startSeconds,
     double? endSeconds,
     Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers =
         const <Factory<OneSequenceGestureRecognizer>>{},
     Color? backgroundColor,
   }) {
-    return Navigator.push<double>(
-      context,
+    return Navigator.of(context,rootNavigator: rootNavigator).push<double>(
       MaterialPageRoute(
         builder: (context) {
           return FullscreenYoutubePlayer(
