@@ -249,9 +249,11 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   /// Loads the player with default [params].
   @internal
   Future<void> init() async {
+    if (_valueController.isClosed) {
     await load(params: params, baseUrl: params.origin);
 
     if (!_initCompleter.isCompleted) _initCompleter.complete();
+    }
   }
 
   /// Loads the player with the given [params].
@@ -261,7 +263,8 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     required YoutubePlayerParams params,
     String? baseUrl,
   }) async {
-    final playerHtml = await rootBundle.loadString(
+    try {
+      final playerHtml = await rootBundle.loadString(
       'packages/youtube_player_iframe/assets/player.html',
     );
 
@@ -275,6 +278,10 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
           .replaceFirst('<<host>>', params.origin ?? 'https://www.youtube.com'),
       baseUrl: baseUrl,
     );
+    } catch (e) {
+      
+    }
+    
   }
 
   Future<void> _run(
@@ -487,8 +494,13 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
 
   @override
   Future<void> setSize(double width, double height) {
-    return _eval('player.setSize($width, $height)');
-  }
+      try {
+        return _eval('player.setSize($width, $height)');
+      } catch (e) {
+        // Handle the exception if needed.
+      }
+      return Future.value();
+    }
 
   @override
   Future<bool> get isMuted async {
