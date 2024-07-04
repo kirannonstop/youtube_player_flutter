@@ -76,9 +76,8 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
   void initState() {
     super.initState();
     _controller = widget.controller;
-    if (mounted) {
-      _initPlayer();
-    }
+    
+    _initPlayer();
   }
 
   @override
@@ -127,8 +126,11 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
   }
 
   void _updateBackgroundColor(Color? backgroundColor) {
+    if (context.mounted){
     final bgColor = backgroundColor ?? Theme.of(context).colorScheme.surface;
     _controller.webViewController.setBackgroundColor(bgColor);
+    }
+    
   }
 
   Future<void> _initPlayer() async {
