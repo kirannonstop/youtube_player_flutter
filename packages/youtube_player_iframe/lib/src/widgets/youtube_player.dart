@@ -136,7 +136,8 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
     // SchedulerBinding.instance.addPostFrameCallback((_) {
     //   _updateBackgroundColor(widget.backgroundColor);
     // });
-    if (mounted)
-       await _controller.init();
+    if (mounted) {
+      await _controller.init();
+    }
   }
 }
