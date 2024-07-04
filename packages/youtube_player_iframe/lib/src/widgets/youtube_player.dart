@@ -79,14 +79,14 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
     _initPlayer();
   }
 
-  @override
+ /* @override
   void didUpdateWidget(YoutubePlayer oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.backgroundColor != oldWidget.backgroundColor) {
       _updateBackgroundColor(widget.backgroundColor);
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
