@@ -288,13 +288,12 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     Map<String, dynamic>? data,
   }) async {
     if (_valueController.isClosed) return;
-    if (!_initCompleter.isCompleted) {
       await _initCompleter.future;
 
       final varArgs = await _prepareData(data);
 
       return webViewController.runJavaScript('player.$functionName($varArgs);');
-    }
+    
   }
 
   Future<String> _runWithResult(
