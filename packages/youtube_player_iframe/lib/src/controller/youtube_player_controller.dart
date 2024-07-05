@@ -250,9 +250,9 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   @internal
   Future<void> init() async {
     if (_valueController.isClosed) {
-      await load(params: params, baseUrl: params.origin);
+    await load(params: params, baseUrl: params.origin);
 
-      if (!_initCompleter.isCompleted) _initCompleter.complete();
+    if (!_initCompleter.isCompleted) _initCompleter.complete();
     }
   }
 
@@ -265,34 +265,34 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   }) async {
     try {
       final playerHtml = await rootBundle.loadString(
-        'packages/youtube_player_iframe/assets/player.html',
-      );
+      'packages/youtube_player_iframe/assets/player.html',
+    );
 
-      final platform =
-          kIsWeb ? 'web' : defaultTargetPlatform.name.toLowerCase();
+    final platform = kIsWeb ? 'web' : defaultTargetPlatform.name.toLowerCase();
 
-      await webViewController.loadHtmlString(
-        playerHtml
-            .replaceFirst('<<pointerEvents>>', params.pointerEvents.name)
-            .replaceFirst('<<playerVars>>', params.toJson())
-            .replaceFirst('<<platform>>', platform)
-            .replaceFirst(
-                '<<host>>', params.origin ?? 'https://www.youtube.com'),
-        baseUrl: baseUrl,
-      );
-    } catch (e) {}
+    await webViewController.loadHtmlString(
+      playerHtml
+          .replaceFirst('<<pointerEvents>>', params.pointerEvents.name)
+          .replaceFirst('<<playerVars>>', params.toJson())
+          .replaceFirst('<<platform>>', platform)
+          .replaceFirst('<<host>>', params.origin ?? 'https://www.youtube.com'),
+      baseUrl: baseUrl,
+    );
+    } catch (e) {
+      
+    }
+    
   }
 
   Future<void> _run(
     String functionName, {
     Map<String, dynamic>? data,
   }) async {
-      await _initCompleter.future;
+    await _initCompleter.future;
 
-      final varArgs = await _prepareData(data);
+    final varArgs = await _prepareData(data);
 
-      return webViewController.runJavaScript('player.$functionName($varArgs);');
-    
+    return webViewController.runJavaScript('player.$functionName($varArgs);');
   }
 
   Future<String> _runWithResult(
@@ -494,13 +494,13 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
 
   @override
   Future<void> setSize(double width, double height) {
-    try {
-      return _eval('player.setSize($width, $height)');
-    } catch (e) {
-      // Handle the exception if needed.
+      try {
+        return _eval('player.setSize($width, $height)');
+      } catch (e) {
+        // Handle the exception if needed.
+      }
+      return Future.value();
     }
-    return Future.value();
-  }
 
   @override
   Future<bool> get isMuted async {
