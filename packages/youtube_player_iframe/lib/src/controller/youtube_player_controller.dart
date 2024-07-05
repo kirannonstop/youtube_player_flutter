@@ -249,12 +249,11 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   /// Loads the player with default [params].
   @internal
   Future<void> init() async {
-    if (_valueController.isClosed) {
     await load(params: params, baseUrl: params.origin);
 
     if (!_initCompleter.isCompleted) _initCompleter.complete();
     }
-  }
+  
 
   /// Loads the player with the given [params].
   ///
